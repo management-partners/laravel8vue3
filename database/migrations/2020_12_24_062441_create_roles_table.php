@@ -5,10 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CreateUsersTable extends Migration
+class CreateRolesTable extends Migration
 {
     use SoftDeletes;
-
     protected $dates = ['deleted_at'];
     /**
      * モデルのタイムスタンプを更新するかの指示
@@ -23,11 +22,12 @@ class CreateUsersTable extends Migration
      * @var string
      */
     protected $dateFormat = 'yyyyMMdd';
+
     /**
-        * The table associated with the model.
-        *
-        * @var string
-        */
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'roles';
 
     /**
@@ -37,13 +37,10 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('description');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -56,6 +53,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
     }
 }
