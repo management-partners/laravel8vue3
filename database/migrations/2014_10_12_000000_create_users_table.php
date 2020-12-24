@@ -3,9 +3,27 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CreateUsersTable extends Migration
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+    /**
+     * モデルのタイムスタンプを更新するかの指示
+     *
+     * @var bool
+     */
+    public $timestamps = true;
+
+    /**
+     * モデルの日付カラムの保存フォーマット
+     *
+     * @var string
+     */
+    protected $dateFormat = 'yyyyMMdd';
+
     /**
      * Run the migrations.
      *
@@ -21,6 +39,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
