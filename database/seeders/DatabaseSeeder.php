@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\RolesSeeder;
-use App\Models\User;
+use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,10 +19,9 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             // PermissionSeeder::class,
             // RolePermissionSeeder::class,
-            // UserSeeder::class,
+            UserSeeder::class,
             // ProductSeeder::class,
             // OrderSeeder::class
         ]);
-        User::factory(10000)->create();
     }
 }
