@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RolesSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\ProductSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class DatabaseSeeder extends Seeder
             // PermissionSeeder::class,
             // RolePermissionSeeder::class,
             UserSeeder::class,
-            // ProductSeeder::class,
+            ProductSeeder::class,
             // OrderSeeder::class
         ]);
     }

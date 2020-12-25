@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\Frontend\UserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Hash;
 use Auth;
@@ -21,7 +22,8 @@ class UserController extends Controller
     public function index()
     {
         // return User::all();
-        return User::paginate();
+        $lstUsr = User::with('role')->paginate();
+        return UserResource::collection($lstUsr);
     }
 
     /**
@@ -38,12 +40,13 @@ class UserController extends Controller
             $user = $user::Create([
                 'name'=>$request->input('name'),
                 'email'=>$request->input('email'),
+                'role_id'=>$request->input('role_id'),
                 'password'=>Hash::make($request->input('password')),
             ]);
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        return response()->json($user, $result);
+        return response(new UserResource($user, $result));
     }
 
     /**
@@ -55,7 +58,8 @@ class UserController extends Controller
     public function show($id)
     {
         // return User::findOrFail($id);
-        return  response()->json(User::findOrFail($id));
+        $user = User::with('role')->findOrFail($id);
+        return  new UserResource($user);
     }
 
     /**
@@ -74,13 +78,14 @@ class UserController extends Controller
             $user ->update([
                 'name'=>$request->input('name'),
                 'email'=>$request->input('email'),
+                'role_id'=>$request->input('role_id'),
                 'password'=>Hash::make($request->input('password')),
             ]);
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        
-        return  response()->json($user, $result);
+
+        return  response(new UserResource($user, $result));
     }
 
     /**
@@ -98,7 +103,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        
+
         return response()->json(null, $result);
     }
 
@@ -110,7 +115,7 @@ class UserController extends Controller
      */
     public function user($id)
     {
-        return response()->json(Auth::user());
+        return response(new UserResource(Auth::user()));
     }
 
     /**
@@ -124,7 +129,6 @@ class UserController extends Controller
         $user = Auth::user();
         $result = Config::get('myConstants.action.success');
         try {
-            $user =  $user::findOrFail($id);
             $user ->update([
                 'name'=>$request->input('name'),
                 'email'=>$request->input('email'),
@@ -132,8 +136,8 @@ class UserController extends Controller
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        
-        return  response()->json($user, $result);
+
+        return  response(new UserResource($user, $result));
     }
 
     /**
@@ -147,7 +151,6 @@ class UserController extends Controller
         $user = Auth::user();
         $result = Config::get('myConstants.action.success');
         try {
-            $user =  $user::findOrFail($id);
             $user ->update([
                 'password'          =>Hash::make($request->input('password')),
                 'password_confirm'  =>Hash::make($request->input('password')),
@@ -155,7 +158,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        
-        return  response()->json($user, $result);
+
+        return  response(new UserResource($user, $result));
     }
 }

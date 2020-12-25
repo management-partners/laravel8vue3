@@ -9,6 +9,7 @@ use Auth;
 use Hash;
 use Config;
 use App\Http\Requests\Frontend\RegisterRequest;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
@@ -76,7 +77,8 @@ class AuthController extends Controller
     {
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
-            $token = $user->createToken('admin')->accessToken;
+            $role = Role::find($user->role_id);
+            $token = $user->createToken($role->name)->accessToken;
 
             return [ 'token' => $token ];
         }

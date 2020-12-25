@@ -26,7 +26,8 @@ class UserRequest extends FormRequest
         return [
             'name'      => 'required',
             'email'     => 'required|email',
-            'password'  => 'required|min:6'
+            'password'  => 'required|min:6',
+            'role_id'   => 'required',
         ];
     }
     //カスタムメッセージを設定
@@ -38,6 +39,7 @@ class UserRequest extends FormRequest
              'email.email'=>'メール式は確認して下さい。',
              'password.required'=>'パスワードは必ず入力して下さい。',
              'password.min'=>'パスワードは最低6入力して下さい。',
+             'name.required'=>'roleは必ず入力して下さい。',
          ];
     }
 }
