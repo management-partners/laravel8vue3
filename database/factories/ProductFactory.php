@@ -27,6 +27,7 @@ class ProductFactory extends Factory
             'image' => $this->faker->imageUrl(),
             'price' => $this->faker->numberBetween(10, 100),
             'cate_id'=> rand(1, 10),
+            'gallery_id'=> rand(1, 10),
         ];
     }
 }

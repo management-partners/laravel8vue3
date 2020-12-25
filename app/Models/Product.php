@@ -33,6 +33,9 @@ use App\Models\Category;
  * @property-read \App\Models\Category $category
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereCateId($value)
  * @property-read Category $cate
+ * @property int $gallery_id
+ * @property-read Category $gallery
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereGalleryId($value)
  */
 class Product extends Model
 {
@@ -41,5 +44,9 @@ class Product extends Model
     public function cate()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function gallery()
+    {
+        return $this->belongsToMany(Gallery::class);
     }
 }

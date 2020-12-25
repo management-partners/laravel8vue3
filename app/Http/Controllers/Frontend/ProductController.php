@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::with('cate')->paginate();
+        $product = Product::paginate();
 
         return ProductResource::collection($product);
     }
@@ -33,13 +33,15 @@ class ProductController extends Controller
         $product = new Product();
         $result = Config::get('myConstants.action.success');
         try {
+            $file = $request->file('image');
             $product = Product::Create([
-                'name'=>$request->input('name'),
-                'description'=>$request->input('description'),
-                'image'=>$request->input('image'),
-                'price'=>$request->input('price'),
-                'cate_id'=>$request->input('cate_id'),
+                'name'          => $request->input('name'),
+                'description'   => $request->input('description'),
+                'image'         => '/images/product/'.$file->getFilename(),
+                'price'         => $request->input('price'),
+                'cate_id'       => $request->input('cate_id'),
             ]);
+            \Store::putFileAs('image', $file, $file->getFilename());
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
@@ -53,7 +55,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return new ProductResource(Product::with('cate')->findOrFail($id));
+        return new ProductResource(Product::findOrFail($id));
     }
 
     /**
