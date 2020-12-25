@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use Config;
+use App\Http\Resources\RoleResource;
 
 class RolesController extends Controller
 {
@@ -16,7 +17,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return Role::all();
+        $role = Role::paginate();
+        return RoleResource::collection($role);
     }
 
     /**
@@ -37,7 +39,7 @@ class RolesController extends Controller
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        return  response()->json($role, $result);
+        return  response(new RoleResource($role, $result));
     }
 
     /**
@@ -49,7 +51,7 @@ class RolesController extends Controller
     public function show($id)
     {
         // return Role::findOrFail($id);
-        return response()->json(Role::findOrFail($id));
+        return response(new RoleResource(Role::findOrFail($id)));
     }
 
     /**
@@ -72,7 +74,7 @@ class RolesController extends Controller
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        return  response()->json($role, $result);
+        return  response(new RoleResource($role, $result));
     }
 
     /**
@@ -90,7 +92,7 @@ class RolesController extends Controller
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        
+
         return response()->json(null, $result);
     }
 }

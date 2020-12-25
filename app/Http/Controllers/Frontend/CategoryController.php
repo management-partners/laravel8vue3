@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductResource;
-use App\Models\Product;
+use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
+use App\Models\Category;
 use Config;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::with('cate')->paginate();
-
-        return ProductResource::collection($product);
+        $cate = Category::paginate();
+        return CategoryResource::collection($cate);
     }
 
     /**
@@ -30,21 +29,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product();
+        $cate = new Category();
         $result = Config::get('myConstants.action.success');
         try {
-            $product = Product::Create([
+            $cate = Category::Create([
                 'name'=>$request->input('name'),
-                'description'=>$request->input('description'),
-                'image'=>$request->input('image'),
-                'price'=>$request->input('price'),
-                'cate_id'=>$request->input('cate_id'),
+                'email'=>$request->input('email'),
+                'role_id'=>$request->input('role_id'),
+                'password'=>Hash::make($request->input('password')),
             ]);
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        return response(new ProductResource($product, $result));
+        return response(new CategoryResource($cate, $result));
     }
+
     /**
      * Display the specified resource.
      *
@@ -53,7 +52,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return new ProductResource(Product::with('cate')->findOrFail($id));
+        $cate = Category::findOrFail($id);
+        return  new CategoryResource($cate);
     }
 
     /**
@@ -65,21 +65,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = new Product();
+        $cate = new Category();
         $result = Config::get('myConstants.action.success');
         try {
-            $product = Product::findOrFail($id);
-            $product ->update([
+            $cate =  Category::findOrFail($id);
+            $cate ->update([
                 'name'=>$request->input('name'),
                 'description'=>$request->input('description'),
-                'image'=>$request->input('image'),
-                'price'=>$request->input('price'),
-                'cate_id'=>$request->input('cate_id'),
             ]);
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        return  response(new ProductResource($product, $result));
+
+        return  response(new CategoryResource($cate, $result));
     }
 
     /**
@@ -92,7 +90,7 @@ class ProductController extends Controller
     {
         $result = Config::get('myConstants.action.success');
         try {
-            Product::destroy($id);
+            Category::destroy($id);
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }

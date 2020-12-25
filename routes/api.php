@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\Frontend\UserController;
 use  App\Http\Controllers\Frontend\AuthController;
 use  App\Http\Controllers\Frontend\RolesController;
+use  App\Http\Controllers\Frontend\ProductController;
+use  App\Http\Controllers\Frontend\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,8 @@ Route::group(['middleware' =>'auth:api'], function () {
     Route::get('user', [UserController::class, 'user']);
     Route::get('user/info', [UserController::class, 'updateInfo']);
     Route::get('user/password', [UserController::class, 'updatePassword']);
-    Route::apiResource('role', RolesController::class);
+    Route::apiResource('roles', RolesController::class);
     Route::apiResource('users', UserController::class);
+    Route::apiResource('products', ProductController::class);
+    Route::apiResource('categories', CategoryController::class);
 });

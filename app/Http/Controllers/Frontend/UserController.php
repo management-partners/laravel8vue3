@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Http\Requests\Frontend\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -96,10 +94,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = new User();
         $result = Config::get('myConstants.action.success');
         try {
-            $user = $user::destroy($id);
+            User::destroy($id);
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
