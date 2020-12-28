@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateGalleriesTable extends Migration
 {
+    public $timestamps = false;
 
     /**
      * The table associated with the model.
@@ -22,8 +23,9 @@ class CreateGalleriesTable extends Migration
     public function up()
     {
         Schema::create('galleries', function (Blueprint $table) {
-            $table->unsignedInteger('id')->primary();
+            $table->id();
             $table ->string('path');
+            $table->timestamps();
         });
     }
 

@@ -22,8 +22,8 @@ class GalleryFactory extends Factory
     public function definition()
     {
         return [
-            'id' => rand(1, 10),
-            'path' => $this->faker->imageUrl(),
+            'path'       => $this->faker->imageUrl(),
+            'product_id' =>rand(1, 10),
         ];
     }
 }

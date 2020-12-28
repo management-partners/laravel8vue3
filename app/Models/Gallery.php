@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Gallery wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Gallery whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $product_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Gallery whereProductId($value)
  */
 class Gallery extends Model
 {

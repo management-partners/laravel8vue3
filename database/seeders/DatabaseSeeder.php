@@ -21,13 +21,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesSeeder::class,
             CategorySeeder::class,
-            GallerySeeder::class,
+
             // PermissionSeeder::class,
             // RolePermissionSeeder::class,
             UserSeeder::class,
 
             ProductSeeder::class,
             // OrderSeeder::class
+            GallerySeeder::class,
         ]);
     }
 }

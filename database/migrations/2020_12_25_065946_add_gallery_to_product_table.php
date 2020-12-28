@@ -13,9 +13,9 @@ class AddGalleryToProductTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->unsignedInteger('gallery_id');
-            $table->foreign('gallery_id')->references('product_id')->on('galleries');
+        Schema::table('galleries', function (Blueprint $table) {
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -26,9 +26,9 @@ class AddGalleryToProductTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign(['gallery_id']);
-            $table->dropColumn('gallery_id');
+        Schema::table('galleries', function (Blueprint $table) {
+            $table->dropForeign(['product_id']);
+            $table->dropColumn('product_id');
         });
     }
 }

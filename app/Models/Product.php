@@ -36,6 +36,7 @@ use App\Models\Category;
  * @property int $gallery_id
  * @property-read Category $gallery
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereGalleryId($value)
+ * @property-read int|null $gallery_count
  */
 class Product extends Model
 {
@@ -47,6 +48,6 @@ class Product extends Model
     }
     public function gallery()
     {
-        return $this->belongsToMany(Gallery::class);
+        return $this->hasMany(Gallery::class);
     }
 }
