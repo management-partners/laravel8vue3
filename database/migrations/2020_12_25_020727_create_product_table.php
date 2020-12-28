@@ -40,7 +40,6 @@ class CreateProductTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('image');
             $table->decimal('price');
             $table->timestamps();
             $table->softDeletes();
