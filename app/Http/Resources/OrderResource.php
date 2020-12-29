@@ -23,6 +23,8 @@ class OrderResource extends JsonResource
             'address'=> $this->address,
             'tel'=> $this->tel,
             'mobile'=> $this->mobile,
+            'total' => $this->total,
+            'total_quantity' => $this->totalQuantity,
             'order_detail' => OrderDetailResource::collection($this->orderDetail),
         ];
     }

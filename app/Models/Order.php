@@ -36,6 +36,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereTel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $total
+ * @property-read mixed $total_quantity
  */
 class Order extends Model
 {
@@ -44,5 +46,17 @@ class Order extends Model
     public function orderDetail()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+    public function getTotalAttribute()
+    {
+        return $this->orderDetail->sum(function (OrderDetail $item) {
+            return $item->price * $item->quantity;
+        });
+    }
+    public function getTotalQuantityAttribute()
+    {
+        return $this->orderDetail->sum(function (OrderDetail $item) {
+            return $item->quantity;
+        });
     }
 }
