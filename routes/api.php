@@ -7,6 +7,7 @@ use  App\Http\Controllers\Frontend\AuthController;
 use  App\Http\Controllers\Frontend\RolesController;
 use  App\Http\Controllers\Frontend\ProductController;
 use  App\Http\Controllers\Frontend\CategoryController;
+use  App\Http\Controllers\Frontend\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +33,5 @@ Route::group(['middleware' =>'auth:api'], function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('products', ProductController::class);
     Route::apiResource('categories', CategoryController::class);
-    Route::apiResource('orders', CategoryController::class);
+    Route::apiResource('orders', OrderController::class);
 });

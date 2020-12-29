@@ -23,7 +23,7 @@ class OrderResource extends JsonResource
             'address'=> $this->address,
             'tel'=> $this->tel,
             'mobile'=> $this->mobile,
-            'order_detail' => OrderDetailResource::collection($this->order_detail),
+            'order_detail' => OrderDetailResource::collection($this->orderDetail),
         ];
     }
 }
