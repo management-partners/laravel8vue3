@@ -32,9 +32,9 @@ class ProductRequest extends FormRequest
     public function messages()
     {
         return [
-              'name.required'=>'名前は必ず入力して下さい。',
-              'price.required'=>'単価は必ず入力して下さい。',
-              'price.numeric'=>'数字式は確認して下さい。',
+              'name.required'   =>'名前は必ず入力して下さい。',
+              'price.required'  =>'単価は必ず入力して下さい。',
+              'price.numeric'   =>'数字式は確認して下さい。',
           ];
     }
 }

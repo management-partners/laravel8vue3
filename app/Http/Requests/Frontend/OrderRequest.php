@@ -35,12 +35,12 @@ class OrderRequest extends FormRequest
     public function messages()
     {
         return [
-              'first_name.required'=>'姓は必ず入力して下さい。',
-              'last_name.required'=>'名は必ず入力して下さい。',
-              'email.required'=>'メールは必ず入力して下さい。。',
-              'email.email'=>'メール式は確認して下さい。',
-              'address.required'=>'住所は必ず入力して下さい。',
-              'mobile.required'=>'携帯電話番号は確認して下さい。',
+              'first_name.required' =>'姓は必ず入力して下さい。',
+              'last_name.required'  =>'名は必ず入力して下さい。',
+              'email.required'      =>'メールは必ず入力して下さい。。',
+              'email.email'         =>'メール式は確認して下さい。',
+              'address.required'    =>'住所は必ず入力して下さい。',
+              'mobile.required'     =>'携帯電話番号は確認して下さい。',
           ];
     }
 }

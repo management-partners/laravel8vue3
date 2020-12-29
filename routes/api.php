@@ -34,4 +34,5 @@ Route::group(['middleware' =>'auth:api'], function () {
     Route::apiResource('products', ProductController::class);
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('orders', OrderController::class);
+    Route::get('exportcsv', [OrderController::class, 'exportCSV']);
 });

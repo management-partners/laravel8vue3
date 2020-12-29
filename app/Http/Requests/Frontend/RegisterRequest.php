@@ -24,23 +24,23 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => 'required',
-            'email'     => 'required|email',
-            'password'  => 'required|min:6',
-            'password_confirm' => 'require|same:password',
+            'name'              => 'required',
+            'email'             => 'required|email',
+            'password'          => 'required|min:6',
+            'password_confirm'  => 'require|same:password',
         ];
     }
     //カスタムメッセージを設定
     public function messages()
     {
         return [
-             'name.required'=>'名前は必ず入力して下さい。',
-             'email.required'=>'メールは必ず入力して下さい。',
-             'email.email'=>'メール式は確認して下さい。',
-             'password.required'=>'パスワードは必ず入力して下さい。',
-             'password.min'=>'パスワードは最低6入力して下さい。',
+             'name.required'            =>'名前は必ず入力して下さい。',
+             'email.required'           =>'メールは必ず入力して下さい。',
+             'email.email'              =>'メール式は確認して下さい。',
+             'password.required'        =>'パスワードは必ず入力して下さい。',
+             'password.min'             =>'パスワードは最低6入力して下さい。',
              'password_confirm.required'=>'パスワード確認は必ず入力して下さい。',
-             'password_confirm.same'=>'パスワードはパスワード確認と違いますので、再確認して下さい。',
+             'password_confirm.same'    =>'パスワードはパスワード確認と違いますので、再確認して下さい。',
          ];
     }
 }

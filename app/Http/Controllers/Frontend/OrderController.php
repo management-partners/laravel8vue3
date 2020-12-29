@@ -139,4 +139,30 @@ class OrderController extends Controller
         }
         return  response(null, $result);
     }
+    public function exportCSV()
+    {
+        $headers=[
+            "Content-type"          => "text/csv",
+            "Content-Disposition"   => "attachment; filename=Order.csv",
+            "Pragma"                => "no-cache",
+            "Cache-Control"         => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"               => 0,
+        ];
+        $callback = function () {
+            $orders = Order::all();
+            $file = fopen('php://output', 'w');
+
+            // create header file
+            fputcsv($file, ['Order ID', 'Order Name', 'Email', 'Post Code', 'Address', 'Tel', 'Mobile', 'Product Name', ' Quantity', 'Price', 'Total']);
+            // create content file
+            foreach ($orders as $order) {
+                fputcsv($file, [$order->id, $order->name,  $order->email,  $order->post_code,  $order->address,  $order->tel,  $order->mobile, '', ' ', '', '']);
+                foreach ($order->orderDetail as $detail) {
+                    fputcsv($file, ['', '',  '',  '',  '',  '',  '', $detail->product_name,  $detail->quantity,  $detail->price,  $detail->total]);
+                }
+            }
+            fclose($file);
+        };
+        return \Response::stream($callback, 200, $headers);
+    }
 }
