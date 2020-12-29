@@ -32,4 +32,5 @@ Route::group(['middleware' =>'auth:api'], function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('products', ProductController::class);
     Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('orders', CategoryController::class);
 });

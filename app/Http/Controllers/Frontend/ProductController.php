@@ -41,20 +41,19 @@ class ProductController extends Controller
             $product = Product::Create([
                 'name'          => $request->input('name'),
                 'description'   => $request->input('description'),
-                // 'image'         => '/images/product/'.$file->getFilename(),
                 'price'         => $request->input('price'),
                 'cate_id'       => $request->input('cate_id'),
             ]);
-
-
-            foreach ($request->file('image') as $file) {
-                Gallery::created(
-                    [
-                        'path'          => $upload_path.$file->getFilename(),
-                        'product_id'    => $product->id
-                    ]
-                );
-                \Store::putFileAs('image', $file, $file->getFilename());
+            if (!empty($request->file('image'))) {
+                foreach ($request->file('image') as $file) {
+                    Gallery::created(
+                        [
+                            'path'          => $upload_path.$file->getFilename(),
+                            'product_id'    => $product->id
+                        ]
+                    );
+                    \Store::putFileAs('image', $file, $file->getFilename());
+                }
             }
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
@@ -89,7 +88,6 @@ class ProductController extends Controller
             $product ->update([
                 'name'=>$request->input('name'),
                 'description'=>$request->input('description'),
-                // 'image'=>$request->input('image'),
                 'price'=>$request->input('price'),
                 'cate_id'=>$request->input('cate_id'),
             ]);

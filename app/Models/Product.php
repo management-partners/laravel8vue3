@@ -41,7 +41,7 @@ use App\Models\Category;
 class Product extends Model
 {
     use HasFactory;
-
+    protected $guarded = [];
     public function cate()
     {
         return $this->belongsTo(Category::class);

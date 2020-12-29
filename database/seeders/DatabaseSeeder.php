@@ -8,6 +8,8 @@ use Database\Seeders\UserSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\GallerySeeder;
+use Database\Seeders\OrderSeeder;
+use Database\Seeders\OrderDetailSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,8 +29,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
 
             ProductSeeder::class,
-            // OrderSeeder::class
             GallerySeeder::class,
+            OrderSeeder::class,
+            OrderDetailSeeder::class,
         ]);
     }
 }
