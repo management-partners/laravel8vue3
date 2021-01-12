@@ -25,9 +25,11 @@ use  App\Http\Controllers\Frontend\HomeController;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::apiResource('/', HomeController::class);
+Route::apiResource('auth', AuthController::class);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
-Route::group(['middleware' =>'auth:api'], function () {
+Route::group(['middleware' =>['auth:api','language']], function () {
     Route::get('chart', [HomeController::class, 'chart']);
 
     Route::get('user', [UserController::class, 'user']);
@@ -40,7 +42,5 @@ Route::group(['middleware' =>'auth:api'], function () {
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('orders', OrderController::class);
     Route::apiResource('permission', PermissionController::class)->only('index');
-    Route::apiResource('permission', PermissionController::class)->only('index');
-
     Route::get('exportcsv', [OrderController::class, 'exportCSV']);
 });
