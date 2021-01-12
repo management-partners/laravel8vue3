@@ -24,9 +24,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $permission
+ * @property-read int|null $permission_count
  */
 class Role extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function permission()
+    {
+        return $this->belongsToMany(Permission::class, 'role_permission');
+    }
 }

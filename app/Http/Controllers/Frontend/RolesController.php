@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use Config;
 use App\Http\Resources\RoleResource;
+use DB;
 
 class RolesController extends Controller
 {
@@ -32,10 +33,21 @@ class RolesController extends Controller
         $role = new Role();
         $result = Config::get('myConstants.action.success');
         try {
+            // create new role
             $role = Role::create([
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
             ]);
+
+            // create new permission for this role
+            if ($permission = $request->input('permission')) {
+                foreach ($permission as $per_id) {
+                    DB::table('role_permission')->insert([
+                        'role_id'       => $role->id,
+                        'permission_id' => $per_id,
+                    ]);
+                }
+            }
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
@@ -66,11 +78,23 @@ class RolesController extends Controller
         $role = new Role();
         $result = Config::get('myConstants.action.success');
         try {
+            // update role infomation
             $role =  $role::findOrFail($id);
             $role ->update([
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
             ]);
+            // delete old permission
+            DB::table('role_permission')->where('role_id', $role->id)->delete();
+            // create new permission for this role
+            if ($permission = $request->input('permission')) {
+                foreach ($permission as $per_id) {
+                    DB::table('role_permission')->insert([
+                        'role_id'       => $role->id,
+                        'permission_id' => $per_id,
+                    ]);
+                }
+            }
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
@@ -88,6 +112,9 @@ class RolesController extends Controller
         $role = new Role();
         $result = Config::get('myConstants.action.success');
         try {
+            // delete old permission
+            DB::table('role_permission')->where('role_id', $id)->delete();
+            // delete this role
             $role = $role::destroy($id);
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');

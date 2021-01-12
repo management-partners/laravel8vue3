@@ -107,12 +107,17 @@ class UserController extends Controller
     /**
      * get profile user.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function user($id)
+    public function user()
     {
-        return response(new UserResource(Auth::user()));
+        $user = Auth::user();
+
+        return (new UserResource($user))->additional([
+            'data' => [
+                'permission' => $user->permission()
+            ]
+        ]);
     }
 
     /**
