@@ -9,6 +9,7 @@ use App\Http\Requests\Frontend\OrderRequest;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Config;
+use Gate;
 
 class OrderController extends Controller
 {
@@ -19,6 +20,7 @@ class OrderController extends Controller
      */
     public function index()
     {
+        Gate::authorize('view', 'orders');
         $order = Order::paginate();
         return OrderResource::collection($order);
     }
@@ -31,6 +33,7 @@ class OrderController extends Controller
      */
     public function store(OrderRequest $request)
     {
+        Gate::authorize('edit', 'orders');
         $order = new Order();
         $result = Config::get('myConstants.action.success');
         try {
@@ -70,6 +73,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('view', 'orders');
         return new OrderResource(Order::findOrFail($id));
     }
 
@@ -82,6 +86,7 @@ class OrderController extends Controller
      */
     public function update(OrderRequest $request, $id)
     {
+        Gate::authorize('edit', 'orders');
         $order = new Order();
         $result = Config::get('myConstants.action.success');
         try {
@@ -130,17 +135,19 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('edit', 'orders');
         $order = new Order();
         $result = Config::get('myConstants.action.success');
         try {
-            Order::find($id)->destroy();
+            $order =  Order::find($id)->destroy();
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        return  response(null, $result);
+        return  response($order, $result);
     }
     public function exportCSV()
     {
+        Gate::authorize('view', 'orders');
         $headers=[
             "Content-type"          => "text/csv",
             "Content-Disposition"   => "attachment; filename=Order.csv",

@@ -9,6 +9,7 @@ use App\Models\User;
 use Hash;
 use Auth;
 use Config;
+use Gate;
 
 class UserController extends Controller
 {
@@ -20,6 +21,7 @@ class UserController extends Controller
     public function index()
     {
         // return User::all();
+        Gate::authorize('view', 'users');
         $lstUsr = User::with('role')->paginate();
         return UserResource::collection($lstUsr);
     }
@@ -32,6 +34,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        Gate::authorize('edit', 'users');
         $user = new User();
         $result = Config::get('myConstants.action.success');
         try {
@@ -56,6 +59,7 @@ class UserController extends Controller
     public function show($id)
     {
         // return User::findOrFail($id);
+        Gate::authorize('view', 'users');
         $user = User::with('role')->findOrFail($id);
         return  new UserResource($user);
     }
@@ -69,6 +73,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
+        Gate::authorize('edit', 'users');
         $user = new User();
         $result = Config::get('myConstants.action.success');
         try {
@@ -94,6 +99,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('edit', 'users');
         $result = Config::get('myConstants.action.success');
         try {
             User::destroy($id);

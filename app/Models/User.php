@@ -75,4 +75,8 @@ class User extends Authenticatable
     {
         return $this->role->permission->pluck('name');
     }
+    public function hasAccess($access)
+    {
+        return $this->permission()->contains($access);
+    }
 }

@@ -9,6 +9,7 @@ use App\Models\Gallery;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Config;
+use Gate;
 
 class ProductController extends Controller
 {
@@ -19,6 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        Gate::authorize('view', 'products');
         $product = Product::paginate();
 
         return ProductResource::collection($product);
@@ -32,6 +34,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        Gate::authorize('edit', 'products');
         $product = new Product();
         $result = Config::get('myConstants.action.success');
         $upload_path =  env('PRODUCT_PATH');
@@ -68,6 +71,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('view', 'products');
         return new ProductResource(Product::findOrFail($id));
     }
 
@@ -80,6 +84,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
+        Gate::authorize('edit', 'products');
         $product = new Product();
         $result = Config::get('myConstants.action.success');
         $upload_path =  env('PRODUCT_PATH');
@@ -119,6 +124,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('edit', 'products');
         $result = Config::get('myConstants.action.success');
         try {
             Product::destroy($id);

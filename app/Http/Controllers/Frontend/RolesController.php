@@ -8,6 +8,7 @@ use App\Models\Role;
 use Config;
 use App\Http\Resources\RoleResource;
 use DB;
+use Gate;
 
 class RolesController extends Controller
 {
@@ -18,6 +19,7 @@ class RolesController extends Controller
      */
     public function index()
     {
+        Gate::authorize('view', 'roles');
         $role = Role::paginate();
         return RoleResource::collection($role);
     }
@@ -30,6 +32,7 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('edit', 'roles');
         $role = new Role();
         $result = Config::get('myConstants.action.success');
         try {
@@ -63,6 +66,7 @@ class RolesController extends Controller
     public function show($id)
     {
         // return Role::findOrFail($id);
+        Gate::authorize('view', 'roles');
         return response(new RoleResource(Role::findOrFail($id)));
     }
 
@@ -75,6 +79,7 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('edit', 'roles');
         $role = new Role();
         $result = Config::get('myConstants.action.success');
         try {
@@ -109,6 +114,7 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('edit', 'roles');
         $role = new Role();
         $result = Config::get('myConstants.action.success');
         try {

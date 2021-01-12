@@ -29,6 +29,7 @@ class OrderFactory extends Factory
             'address'=> $this->faker->text(100),
             'tel'=> $this->faker->text(11),
             'mobile'=> $this->faker->text(12),
+            'created_at' => $this->faker->dateTime,
         ];
     }
 }
