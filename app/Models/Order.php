@@ -38,6 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read mixed $total
  * @property-read mixed $total_quantity
+ * @property-read mixed $name
  */
 class Order extends Model
 {

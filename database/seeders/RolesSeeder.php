@@ -18,17 +18,17 @@ class RolesSeeder extends Seeder
         DB::table('roles')->insert(
             [
             [
-                'name' => 'admin',
+                'name' => 'Admin',
                 'description' => 'System managerment',
                 'created_at' =>  Carbon::now()
             ],
             [
-                'name' => 'editor',
+                'name' => 'Editor',
                 'description' => 'System post managerment',
                 'created_at' =>  Carbon::now()
             ],
             [
-                'name' => 'user',
+                'name' => 'Viewer',
                 'description' => 'Normal user in system',
                 'created_at' =>  Carbon::now()
             ],

@@ -151,7 +151,6 @@ class OrderController extends Controller
         $callback = function () {
             $orders = Order::all();
             $file = fopen('php://output', 'w');
-
             // create header file
             fputcsv($file, ['Order ID', 'Order Name', 'Email', 'Post Code', 'Address', 'Tel', 'Mobile', 'Product Name', ' Quantity', 'Price', 'Total']);
             // create content file
