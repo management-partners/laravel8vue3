@@ -9,7 +9,9 @@ use Auth;
 use Hash;
 use Config;
 use App\Http\Requests\Frontend\RegisterRequest;
+use App\Http\Resources\Frontend\UserResource;
 use App\Models\Frontend\Role;
+use App\Models\Frontend\User;
 
 class AuthController extends Controller
 {
@@ -94,14 +96,15 @@ class AuthController extends Controller
         $user = new User();
         $result = Config::get('myConstants.action.success');
         try {
-            $user = $user::Create([
+            $user = User::Create([
                 'name'=>$request->input('name'),
                 'email'=>$request->input('email'),
                 'password'=>Hash::make($request->input('password')),
+                'role_id' => 3,
             ]);
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
-        return response()->json($user, $result);
+        return response(new UserResource($user, $result));
     }
 }

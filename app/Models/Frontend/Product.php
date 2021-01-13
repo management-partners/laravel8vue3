@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Frontend\Category;
 
 /**
- * App\Models\Product
+ * App\Models\Frontend\Product
  *
  * @property int $id
  * @property string $name

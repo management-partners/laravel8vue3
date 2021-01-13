@@ -10,7 +10,7 @@
  */
 
 
-namespace App\Models{
+namespace App\Models\Frontend{
 /**
  * App\Models\Category
  *
@@ -34,9 +34,119 @@ namespace App\Models{
 	class Category extends \Eloquent {}
 }
 
-namespace App\Models{
+namespace App\Models\Frontend{
 /**
- * App\Models\Product
+ * App\Models\Gallery
+ *
+ * @property int $id
+ * @property string $path
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Gallery newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Gallery newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Gallery query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Gallery whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Gallery whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Gallery whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Gallery wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Gallery whereUpdatedAt($value)
+ * @mixin \Eloquent
+ * @property int $product_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Gallery whereProductId($value)
+ */
+	class Gallery extends \Eloquent {}
+}
+
+namespace App\Models\Frontend{
+/**
+ * App\Models\Frontend\Order
+ *
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $email
+ * @property string $post_code
+ * @property string $address
+ * @property string $tel
+ * @property string $mobile
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\OrderDetail[] $orderDetail
+ * @property-read int|null $order_detail_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereMobile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePostCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereTel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
+ * @mixin \Eloquent
+ * @property-read mixed $total
+ * @property-read mixed $total_quantity
+ * @property-read mixed $name
+ */
+	class Order extends \Eloquent {}
+}
+
+namespace App\Models\Frontend{
+/**
+ * App\Models\OrderDetail
+ *
+ * @property int $id
+ * @property int $order_id
+ * @property string $product_name
+ * @property string $product_description
+ * @property string $product_image
+ * @property string $price
+ * @property int $quantity
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Order $order
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail query()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereProductDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereProductImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereProductName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderDetail whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class OrderDetail extends \Eloquent {}
+}
+
+namespace App\Models\Frontend{
+/**
+ * App\Models\Permision
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Permision newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Permision newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Permision query()
+ * @mixin \Eloquent
+ * @property int $id
+ * @property string $name
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission whereName($value)
+ */
+	class Permission extends \Eloquent {}
+}
+
+namespace App\Models\Frontend{
+/**
+ * App\Models\Frontend\Product
  *
  * @property int $id
  * @property string $name
@@ -62,13 +172,17 @@ namespace App\Models{
  * @property-read \App\Models\Category $category
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereCateId($value)
  * @property-read Category $cate
+ * @property int $gallery_id
+ * @property-read Category $gallery
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereGalleryId($value)
+ * @property-read int|null $gallery_count
  */
 	class Product extends \Eloquent {}
 }
 
-namespace App\Models{
+namespace App\Models\Frontend{
 /**
- * App\Models\Role
+ * App\Models\Frontend\Role
  *
  * @property int $id
  * @property string $name
@@ -86,13 +200,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $permission
+ * @property-read int|null $permission_count
  */
 	class Role extends \Eloquent {}
 }
 
-namespace App\Models{
+namespace App\Models\Frontend{
 /**
- * App\Models\User
+ * App\Models\Frontend\User
  *
  * @property int $id
  * @property string $name

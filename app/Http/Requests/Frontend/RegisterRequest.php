@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'name'              => 'required',
             'email'             => 'required|email',
             'password'          => 'required|min:6',
-            'password_confirm'  => 'require|same:password',
+            'password_confirm'  => 'required|same:password',
         ];
     }
     //カスタムメッセージを設定

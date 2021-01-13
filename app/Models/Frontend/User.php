@@ -9,7 +9,7 @@ use Laravel\Passport\HasApiTokens;
 use App\Models\Frontend\Role;
 
 /**
- * App\Models\User
+ * App\Models\Frontend\User
  *
  * @property int $id
  * @property string $name
@@ -46,7 +46,7 @@ use App\Models\Frontend\Role;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
