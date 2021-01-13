@@ -29,6 +29,7 @@ Route::apiResource('/', HomeController::class);
 Route::apiResource('auth', AuthController::class);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
+
 Route::group(['middleware' =>['auth:api','language']], function () {
     Route::get('chart', [HomeController::class, 'chart']);
 

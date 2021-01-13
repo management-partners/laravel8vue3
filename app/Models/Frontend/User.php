@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Frontend;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
-use App\Models\Role;
+use App\Models\Frontend\Role;
 
 /**
  * App\Models\User

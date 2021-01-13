@@ -9,7 +9,7 @@ use Auth;
 use Hash;
 use Config;
 use App\Http\Requests\Frontend\RegisterRequest;
-use App\Models\Role;
+use App\Models\Frontend\Role;
 
 class AuthController extends Controller
 {

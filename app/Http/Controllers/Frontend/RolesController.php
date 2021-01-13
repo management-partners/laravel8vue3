@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Role;
+use App\Models\Frontend\Role;
 use Config;
-use App\Http\Resources\RoleResource;
+use App\Http\Resources\Frontend\RoleResource;
 use DB;
 use Gate;
 

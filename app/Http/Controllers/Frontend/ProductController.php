@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\Frontend\ProductResource;
 use App\Http\Requests\Frontend\ProductRequest;
-use App\Models\Gallery;
-use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Models\Frontend\Gallery;
+use App\Models\Frontend\Product;
 use Config;
 use Gate;
 

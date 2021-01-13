@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Resources\OrderResource;
+use App\Http\Resources\Frontend\OrderResource;
 use App\Http\Requests\Frontend\OrderRequest;
-use App\Models\Order;
-use App\Models\OrderDetail;
+use App\Models\Frontend\Order;
+use App\Models\Frontend\OrderDetail;
 use Config;
 use Gate;
 

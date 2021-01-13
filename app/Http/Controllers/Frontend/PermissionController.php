@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PermissionResource;
-use App\Models\Permission;
+use App\Http\Resources\Frontend\PermissionResource;
+use App\Models\Frontend\Permission;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller

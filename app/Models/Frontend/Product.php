@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Frontend;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
+use App\Models\Frontend\Category;
 
 /**
  * App\Models\Product

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CategoryResource;
+use App\Http\Resources\Frontend\CategoryResource;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Frontend\Category;
 use Config;
 
 class CategoryController extends Controller

@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.79.0">
-        <title>{{ trans('login.title') }}</title>
+        <title>{{ trans('fr_login.title') }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -50,25 +50,25 @@
                 <form action="{{ route('index') }}" method="POST">
                     <div class="mb-3 row">
                         <label for="staticEmail"
-                            class="col-sm-3 col-form-label">{{ trans('login.userName') }}</label>
+                            class="col-sm-3 col-form-label">{{ trans('fr_login.userName') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="userName" placeholder="User name or email">
+                            <input type="text" class="form-control" id="userName" placeholder="{{ trans('fr_login.placeUserName') }}">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="inputPassword"
-                            class="col-sm-3 col-form-label">{{ trans('login.password') }}</label>
+                            class="col-sm-3 col-form-label">{{ trans('fr_login.password') }}</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="inputPassword">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="{{ trans('fr_login.placePass') }}">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-3 col-form-label"></label>
                         <div class="col-sm-9">
                             <button type="submit"
-                                class="btn btn-primary">{{ trans('login.login') }}</button> &nbsp;
+                                class="btn btn-primary">{{ trans('fr_login.login') }}</button> &nbsp;
                             <button type="reset"
-                                class="btn btn-info">{{ trans('login.cancel') }}</button>
+                                class="btn btn-info">{{ trans('fr_login.cancel') }}</button>
                         </div>
                     </div>
                 </form>
