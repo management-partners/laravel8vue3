@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Frontend\ChartResource;
-use App\Models\Frontend\Order;
+use App\Models\Order;
 use Gate;
 use Illuminate\Http\Request;
 

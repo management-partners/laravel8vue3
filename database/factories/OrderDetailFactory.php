@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Frontend\OrderDetail;
+use App\Models\OrderDetail;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderDetailFactory extends Factory

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\UserRequest;
 use App\Http\Resources\Frontend\UserResource;
-use App\Models\Frontend\User;
+use App\Models\User;
 use Hash;
 use Auth;
 use Config;

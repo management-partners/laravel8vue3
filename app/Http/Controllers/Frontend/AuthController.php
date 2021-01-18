@@ -10,8 +10,8 @@ use Hash;
 use Config;
 use App\Http\Requests\Frontend\RegisterRequest;
 use App\Http\Resources\Frontend\UserResource;
-use App\Models\Frontend\Role;
-use App\Models\Frontend\User;
+use App\Models\Role;
+use App\Models\User;
 
 class AuthController extends Controller
 {

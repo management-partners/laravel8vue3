@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserSeeder extends Seeder
 {
@@ -15,6 +14,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10000)->create();
+        User::factory(100)->create();
     }
 }

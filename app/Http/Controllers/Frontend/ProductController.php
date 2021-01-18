@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Frontend\ProductResource;
 use App\Http\Requests\Frontend\ProductRequest;
-use App\Models\Frontend\Gallery;
-use App\Models\Frontend\Product;
+use App\Models\Gallery;
+use App\Models\Product;
 use Config;
 use Gate;
 
@@ -46,15 +46,17 @@ class ProductController extends Controller
                 'price'         => $request->input('price'),
                 'cate_id'       => $request->input('cate_id'),
             ]);
-            if (!empty($request->file('image'))) {
-                foreach ($request->file('image') as $file) {
-                    Gallery::created(
+            if (!empty($request->file('images'))) {
+                foreach ($request->file('images') as $file) {
+                    $path_img = $upload_path.$file->getClientOriginalName();
+                    Gallery::Create(
                         [
-                            'path'          => $upload_path.$file->getFilename(),
+                            'path'          => $path_img,
                             'product_id'    => $product->id
                         ]
                     );
-                    \Store::putFileAs('image', $file, $file->getFilename());
+                    \Storage::disk('public')->put($file->getClientOriginalName(), $file->getClientOriginalName());
+                    // \Storage::putFileAs('disk', $file, $file->getClientOriginalName());
                 }
             }
         } catch (\Exception $e) {
@@ -98,16 +100,16 @@ class ProductController extends Controller
 
             $gallery = Gallery::findOrFail($id);
             foreach ($gallery as $g) {
-                Storage::delete($upload_path.$g->path);
+                \Storage::delete('public/images/products'.$g->path);
             }
             foreach ($request->file('image') as $file) {
                 $gallery ->update(
                     [
-                        'path'          => $upload_path.$file->getFilename(),
+                        'path'          => $upload_path.$file->getClientOriginalName(),
                         'product_id'    => $id
                     ]
                 );
-                \Store::putFileAs('image', $file, $file->getFilename());
+                \Storage::putFileAs('public/images/products', $file, $file->getClientOriginalName());
             }
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
