@@ -109,7 +109,7 @@ class ProductController extends Controller
                         'product_id'    => $id
                     ]
                 );
-                \Storage::putFileAs('public/images/products', $file, $file->getClientOriginalName());
+                \Storage::disk('public')->put($file->getClientOriginalName(), $file->getClientOriginalName());
             }
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
