@@ -27,8 +27,8 @@ class OrderFactory extends Factory
             'email'  => $this->faker->email(),
             'post_code'=> $this->faker->text(10),
             'address'=> $this->faker->text(100),
-            'tel'=> $this->faker->text(11),
-            'mobile'=> $this->faker->text(12),
+            'tel'=> $this->faker->phoneNumber,
+            'mobile'=> $this->faker->phoneNumber,
             'created_at' => $this->faker->dateTime,
         ];
     }
