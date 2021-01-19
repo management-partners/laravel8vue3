@@ -9,6 +9,7 @@ use App\Models\Gallery;
 use App\Models\Product;
 use Config;
 use Gate;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -36,7 +37,7 @@ class ProductController extends Controller
         Gate::authorize('edit', 'products');
         $product = new Product();
         $result = Config::get('myConstants.action.success');
-        $upload_path =  env('PRODUCT_PATH');
+        $upload_path =  env('APP_URL').env('PRODUCT_PATH');
         try {
             // $file = $request->file('image');
 
@@ -48,15 +49,15 @@ class ProductController extends Controller
             ]);
             if (!empty($request->file('images'))) {
                 foreach ($request->file('images') as $file) {
-                    $path_img = $upload_path.$file->getClientOriginalName();
+                    $fileName = $file->getClientOriginalName();
+                    $path_img = $upload_path.$fileName ;
                     Gallery::Create(
                         [
                             'path'          => $path_img,
                             'product_id'    => $product->id
                         ]
                     );
-                    \Storage::disk('public')->put($file->getClientOriginalName(), $file->getClientOriginalName());
-                    // \Storage::putFileAs('disk', $file, $file->getClientOriginalName());
+                    Storage::disk('public')->putFileAs('/', $file, $fileName);
                 }
             }
         } catch (\Exception $e) {
@@ -88,7 +89,7 @@ class ProductController extends Controller
         Gate::authorize('edit', 'products');
         $product = new Product();
         $result = Config::get('myConstants.action.success');
-        $upload_path =  env('PRODUCT_PATH');
+        $upload_path =  env('APP_URL').env('PRODUCT_PATH');
         try {
             $product = Product::findOrFail($id);
             $product ->update([
@@ -100,16 +101,17 @@ class ProductController extends Controller
 
             $gallery = Gallery::findOrFail($id);
             foreach ($gallery as $g) {
-                \Storage::delete('public/images/products'.$g->path);
+                Storage::delete('public/images/products'.$g->path);
             }
             foreach ($request->file('image') as $file) {
+                $fileName = $file->getClientOriginalName();
                 $gallery ->update(
                     [
-                        'path'          => $upload_path.$file->getClientOriginalName(),
+                        'path'          => $upload_path.$fileName,
                         'product_id'    => $id
                     ]
                 );
-                \Storage::disk('public')->put($file->getClientOriginalName(), $file->getClientOriginalName());
+                Storage::disk('public')->putFileAs('/', $file, $fileName);
             }
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
@@ -128,11 +130,12 @@ class ProductController extends Controller
         Gate::authorize('edit', 'products');
         $result = Config::get('myConstants.action.success');
         try {
+            Gallery::where('product_id', $id)->delete();
             Product::destroy($id);
         } catch (\Exception $e) {
             $result = Config::get('myConstants.action.fail');
         }
 
-        return response()->json(null, $result);
+        return response()->json($result, $result);
     }
 }
