@@ -23,6 +23,7 @@ class GalleryFactory extends Factory
     {
         return [
             'path'       => $this->faker->imageUrl(),
+            'name'       => $this->faker->text(10),
             'product_id' =>rand(1, 10),
         ];
     }

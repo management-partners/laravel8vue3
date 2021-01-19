@@ -54,6 +54,7 @@ class ProductController extends Controller
                     Gallery::Create(
                         [
                             'path'          => $path_img,
+                            'name'          => $fileName,
                             'product_id'    => $product->id
                         ]
                     );
@@ -101,13 +102,14 @@ class ProductController extends Controller
 
             $gallery = Gallery::findOrFail($id);
             foreach ($gallery as $g) {
-                Storage::delete('public/images/products'.$g->path);
+                Storage::delete(env('PRODUCT_PATH').$g->path);
             }
             foreach ($request->file('image') as $file) {
                 $fileName = $file->getClientOriginalName();
                 $gallery ->update(
                     [
                         'path'          => $upload_path.$fileName,
+                        'name'          => $fileName,
                         'product_id'    => $id
                     ]
                 );
