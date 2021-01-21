@@ -36,8 +36,8 @@ Route::group(['middleware' =>['auth:api','language']], function () {
     Route::get('chartyear/{year}', [HomeController::class, 'chartForYear']);
 
     Route::get('user', [UserController::class, 'user']);
-    Route::get('user/info', [UserController::class, 'updateInfo']);
-    Route::get('user/password', [UserController::class, 'updatePassword']);
+    Route::put('user/info', [UserController::class, 'updateInfo']);
+    Route::put('user/password', [UserController::class, 'updatePassword']);
 
     Route::apiResource('roles', RolesController::class);
     Route::apiResource('users', UserController::class);
