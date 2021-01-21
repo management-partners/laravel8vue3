@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\UserRequest;
 use App\Http\Resources\Frontend\UserResource;
+use App\Http\Requests\Frontend\UpdateInfoRequest;
+use App\Http\Requests\Frontend\UpdatePasswordRequest;
 use App\Models\User;
 use Hash;
 use Auth;
