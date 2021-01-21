@@ -74,4 +74,26 @@ class HomeController extends Controller
             ->get();
         return ChartResource::collection($order);
     }
+    public function chartForYear($year)
+    {
+        Gate::authorize('view', 'orders');
+        $order = Order::query()
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->selectRaw("DATE_FORMAT(orders.created_at, '%Y-%m-%d') as date, SUM(order_details.quantity*order_details.price) as total_order")
+            ->groupBy('date')
+            ->whereYear('orders.created_at', $year)
+            ->get();
+        
+        return ChartResource::collection($order);
+    }
+    public function chartAllYear()
+    {
+        Gate::authorize('view', 'orders');
+        $order = Order::query()
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->selectRaw("DATE_FORMAT(orders.created_at, '%Y') as date")
+            ->groupBy('date')
+            ->get();
+        return response()->json($order);
+    }
 }

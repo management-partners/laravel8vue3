@@ -32,6 +32,8 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::group(['middleware' =>['auth:api','language']], function () {
     Route::get('chart', [HomeController::class, 'chart']);
+    Route::get('chartallyear', [HomeController::class, 'chartAllYear']);
+    Route::get('chartyear/{year}', [HomeController::class, 'chartForYear']);
 
     Route::get('user', [UserController::class, 'user']);
     Route::get('user/info', [UserController::class, 'updateInfo']);
