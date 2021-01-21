@@ -137,17 +137,21 @@ class UserController extends Controller
     public function updateInfo(UpdateInfoRequest $request)
     {
         $user = Auth::user();
-        $result = Config::get('myConstants.action.success');
+        // $result = Config::get('myConstants.action.success');
         try {
             $user ->update([
                 'name'=>$request->input('name'),
                 'email'=>$request->input('email'),
             ]);
         } catch (\Exception $e) {
-            $result = Config::get('myConstants.action.fail');
+            // $result = Config::get('myConstants.action.fail');
         }
-
-        return  response(new UserResource($user, $result));
+        return (new UserResource($user))->additional([
+            'data' => [
+                'permission' => $user->permission()
+            ]
+        ]);
+        // return  response(new UserResource($user), $result));
     }
 
     /**
@@ -159,16 +163,20 @@ class UserController extends Controller
     public function updatePassword(UpdatePasswordRequest $request)
     {
         $user = Auth::user();
-        $result = Config::get('myConstants.action.success');
+        // $result = Config::get('myConstants.action.success');
         try {
             $user ->update([
                 'password'          =>Hash::make($request->input('password')),
                 'password_confirm'  =>Hash::make($request->input('password')),
             ]);
         } catch (\Exception $e) {
-            $result = Config::get('myConstants.action.fail');
+            // $result = Config::get('myConstants.action.fail');
         }
-
-        return  response(new UserResource($user, $result));
+        return (new UserResource($user))->additional([
+            'data' => [
+                'permission' => $user->permission()
+            ]
+        ]);
+        // return  response(new UserResource($user, $result));
     }
 }
