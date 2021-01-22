@@ -25,7 +25,9 @@ Route::get('locale/{locale}', function ($lang) {
 
 Route::group(['middleware'=>'language'], function () {
     Route::get('/', function () {
-        // return view('frontend.app');
-        return view('welcome');
+        return view('frontend.app');
+    });
+    Route::get('admin/', function () {
+        return view('backend.admin');
     });
 });
